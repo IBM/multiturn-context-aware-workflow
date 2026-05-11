@@ -1,0 +1,52 @@
+// Import Carbon Design System styles
+@use '@carbon/react';
+
+// Global styles
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'IBM Plex Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// Custom styles for the app
+.workflow-progress-step {
+  margin-bottom: 1rem;
+}
+
+.message-bubble {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  
+  &.user {
+    background-color: #0f62fe;
+    color: white;
+    margin-left: 2rem;
+  }
+  
+  &.agent {
+    background-color: #262626;
+    color: #f4f4f4;
+    margin-right: 2rem;
+  }
+}
+
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Made with Bob

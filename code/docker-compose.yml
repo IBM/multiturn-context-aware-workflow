@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  # ─────────────────────────────────────────────────────────────────────────
+  # Multiturn Workflow Agent Demo — Single Container
+  #
+  # Contains:
+  #   - FastAPI backend (uvicorn, internal port 8000)
+  #   - Carbon React frontend (nginx, external port 9000)
+  #   - supervisord managing both processes
+  #
+  # nginx proxies /api/* → uvicorn internally
+  # Access the app at: http://localhost:9000
+  # ─────────────────────────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=/api
+    container_name: multiturn-workflow-agent
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    environment:
+      - OPENSEARCH_INDEX=${OPENSEARCH_INDEX:-workflow_documents}
+      - EMBEDDING_MODEL_ID=${EMBEDDING_MODEL_ID:-intfloat/multilingual-e5-large}
+      - LLM_MODEL_ID=${LLM_MODEL_ID:-ibm/granite-3-8b-instruct}
+      - WATSONX_URL=${WATSONX_URL:-https://us-south.ml.cloud.ibm.com}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    volumes:
+      # Optional: Mount data directory for persistence
+      - workflow-data:/app/data
+
+volumes:
+  workflow-data:
+    driver: local
+
+# Made with Bob - Multiturn Workflow Agent
