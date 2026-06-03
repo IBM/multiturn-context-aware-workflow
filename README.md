@@ -18,4 +18,4 @@ This repository contains the sample code for the IBM Developer tutorial on build
 
 Follow the full setup and implementation steps in the IBM Developer tutorial:
 
-**[Placeholder: Build a multiturn AI agent for complex asset maintenance workflows](#)**
+**[Link](https://developer.ibm.com/tutorials/multiturn-workflow-ai-agent-rag-opensearch-watsonx/)**
